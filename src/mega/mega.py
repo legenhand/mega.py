@@ -753,7 +753,7 @@ class Mega:
                 mac_str = mac_encryptor.encrypt(encryptor.encrypt(block))
 
                 file_info = os.stat(temp_output_file.name)
-                message.edit(
+                await message.edit(
                     '%s of %s downloaded', file_info.st_size, file_size
                 )
             file_mac = str_to_a32(mac_str)
