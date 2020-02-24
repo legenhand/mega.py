@@ -639,7 +639,7 @@ class Mega:
         nodes = self.get_files()
         return self.get_folder_link(nodes[node_id])
 
-    def download_url(self,message, url, dest_path=None, dest_filename=None):
+    def download_url(self, message, url, dest_path=None, dest_filename=None):
         """
         Download a file by it's public url
         """
@@ -655,7 +655,7 @@ class Mega:
             is_public=True,
         )
 
-    def _download_file(
+    async def _download_file(
         self,
         message,
         file_handle,
