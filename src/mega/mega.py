@@ -718,7 +718,7 @@ class Mega:
             dest_path = ''
         else:
             dest_path += '/'
-
+        count = 0
         with tempfile.NamedTemporaryFile(
             mode='w+b', prefix='megapy_', delete=False
         ) as temp_output_file:
@@ -754,8 +754,9 @@ class Mega:
                 mac_str = mac_encryptor.encrypt(encryptor.encrypt(block))
 
                 file_info = os.stat(temp_output_file.name)
-                time.sleep(0.5)
-                await message.edit("{} of {} downloaded".format(humanbytes(file_info.st_size), humanbytes(file_size)))
+                count += 1
+                if count == 10:
+                    await message.edit("{} of {} downloaded\n{0:.2f}%".format(humanbytes(file_info.st_size), humanbytes(file_size), (file_info.st_size/file_size)*100))
             file_mac = str_to_a32(mac_str)
             # check mac integrity
             if (
