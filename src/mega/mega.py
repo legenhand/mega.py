@@ -756,7 +756,8 @@ class Mega:
                 file_info = os.stat(temp_output_file.name)
                 count += 1
                 if count == 10:
-                    await message.edit("{} of {} downloaded\n{0:.2f}%".format(humanbytes(file_info.st_size), humanbytes(file_size), (file_info.st_size/file_size)*100))
+                    percentage = (file_info.st_size/file_size)*100
+                    await message.edit("{} of {} downloaded\n{}%".format(humanbytes(file_info.st_size), humanbytes(file_size), round(percentage,1)))
             file_mac = str_to_a32(mac_str)
             # check mac integrity
             if (
