@@ -755,7 +755,7 @@ class Mega:
 
                 file_info = os.stat(temp_output_file.name)
                 time.sleep(0.5)
-                await message.edit("{} of {} downloaded".format(file_info.st_size, file_size))
+                await message.edit("{} of {} downloaded".format(humanbytes(file_info.st_size), humanbytes(file_size)))
             file_mac = str_to_a32(mac_str)
             # check mac integrity
             if (
@@ -1095,3 +1095,17 @@ class Mega:
                 ]
             }
         )
+def humanbytes(size):
+    """Input size in bytes,
+    outputs in a human readable format"""
+    # https://stackoverflow.com/a/49361727/4723940
+    if not size:
+        return ""
+    # 2 ** 10 = 1024
+    power = 2**10
+    raised_to_pow = 0
+    dict_power_n = {0: "", 1: "Ki", 2: "Mi", 3: "Gi", 4: "Ti"}
+    while size > power:
+        size /= power
+        raised_to_pow += 1
+    return str(round(size, 2)) + " " + dict_power_n[raised_to_pow] + "B"
