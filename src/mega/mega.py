@@ -758,6 +758,7 @@ class Mega:
                 if count == 10:
                     percentage = (file_info.st_size/file_size)*100
                     await message.edit("{} of {} downloaded\n{}%".format(humanbytes(file_info.st_size), humanbytes(file_size), round(percentage,1)))
+                    count = 0
             file_mac = str_to_a32(mac_str)
             # check mac integrity
             if (
